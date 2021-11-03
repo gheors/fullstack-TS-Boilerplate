@@ -1,0 +1,28 @@
+version: '3.7'
+
+services:
+  mongodb:
+      container_name: mongodb
+      image: mongo
+      ports:
+       - "27017:27017"  
+      volumes:
+       - ./backend/mongodb/:/data/db
+      restart: unless-stopped
+  backend:
+    container_name: backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      target: base
+    volumes:
+      - ./backend/src:/home/node/app/src
+      - ./backend/nodemon.json:/home/node/app/nodemon.json
+    expose:
+      - '5000'
+    ports:
+      - '5000:5000'
+    command: npm run dev
+    links:
+      - mongodb
+

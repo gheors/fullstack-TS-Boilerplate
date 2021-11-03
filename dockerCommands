@@ -1,0 +1,18 @@
+
+// build docker container
+    docker-compose build
+
+//run docker container 
+    docker-compose up -d
+
+// down docker contianer
+    docker-compose down
+
+// remove all containers from docker
+    docker rm -f $(docker ps -a -q)
+
+// remove all volumes form docker
+    docker volume rm $(docker volume ls -q)
+    
+// remove all images from docker
+    docker rmi $(docker images -a -q)  

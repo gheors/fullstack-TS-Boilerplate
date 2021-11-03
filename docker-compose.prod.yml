@@ -1,0 +1,12 @@
+version: '3.7'
+
+services:
+  backend:
+    build:
+      target: production
+    command: node build/server.js
+
+
+
+
+    # docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d   
