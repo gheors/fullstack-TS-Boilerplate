@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { addEvent, deleteEvent, getEvents } from "controller/eventsControl"
+import { addEvent, deleteEvent, getEvents } from "../controller/eventsControl"
 const router = express.Router();
 
 // POST : add event
@@ -12,7 +12,7 @@ router.post('/', async (req, res) => {
 // GET : get all events
 router.get('/', async (req, res) => {
     const events = await getEvents()
-    res.send('hello')
+    res.send(events)
 })
 
 // DELETE : delete event
