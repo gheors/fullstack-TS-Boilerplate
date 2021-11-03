@@ -7,6 +7,17 @@
      ./startdev.sh
 
 ## run on Docker
-#### this will build a docker container with the folloeing images: mongodb, backendApp
+#### this will build a docker container with the following images: mongodb, backendApp
 ### run on command line: 
      ./start.sh
+
+## reset all Docker content
+#### this will delete all containers, images and volumes on docker
+     ./cleanDocker.sh
+
+
+## Technologies
+
+- **Typescript** programming language
+- **nodeExpress** Rest framework
+- **mongoDB** database

@@ -1,12 +1,12 @@
 import mongoose from 'mongoose';
 
-// typescript, extends mongoose.. because Video will have an ID that we wanna access
+// typescript extends mongoose
 export interface IEvent extends mongoose.Document {
     name: string,
 }
 // mongo
-const VideoSchema = new mongoose.Schema({
+const EventSchema = new mongoose.Schema({
     name: String,
 })
 
-export const Event = mongoose.model<IEvent>("events", VideoSchema);
+export const Event = mongoose.model<IEvent>("events", EventSchema);

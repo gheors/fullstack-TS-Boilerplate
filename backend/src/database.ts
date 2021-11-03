@@ -8,7 +8,9 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
     console.log(`...${MONGODB_URI} connected...`)
-    addEvent("test91")
+
+    // testing database connection
+    addEvent("test Connection")
 });
 
 export { db }
