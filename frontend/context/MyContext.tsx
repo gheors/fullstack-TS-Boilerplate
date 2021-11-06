@@ -1,5 +1,5 @@
 import React from "react";
-import { License, MapboxStyle } from "../interface/interfaces";
+import { License, MapboxStyle } from "../interface/global-interfaces";
 
 export const MyContext = React.createContext({
   licenses: [] as License[],

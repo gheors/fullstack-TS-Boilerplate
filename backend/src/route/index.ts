@@ -5,6 +5,7 @@ import userRoute from "./userRoute"
 
 const router = express.Router()
 router.use('/user', userRoute)
-router.use('/api/events', authenticateJWT, eventsRoute)
+// router.use('/api/events', authenticateJWT, eventsRoute)
+router.use('/api/events', eventsRoute)
 
 export default router

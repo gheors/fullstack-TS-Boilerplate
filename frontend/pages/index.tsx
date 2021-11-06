@@ -1,16 +1,42 @@
+import { Box } from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
-import React from 'react'
-import { License } from '../interface/interfaces';
+import React, { useState } from 'react'
+import { Event } from '../interface/event-Interface';
+import { License } from '../interface/global-interfaces';
+import { deleteEvent, getEventByName, getEvents, postEvent } from '../services/api/eventsAPI';
 
 
 interface Props {
 }
 
 export default function index({ }: Props) {
+  const event: Event = {
+    name: "posted event"
+  }
+
+  const [events, setEvents] = useState<Event[]>([])
+
   return (
-    <div>
-      hello
-    </div>
+    <Box color='white'>
+      <Box onClick={() => postEvent(event)}>add</Box>
+      <Box onClick={() => {
+        const res = getEventByName(event.name)
+        console.log(res)
+      }}>
+        get event
+      </Box>
+      <Box onClick={async () => {
+        const events = await getEvents()
+        console.log(events)
+
+      }}>getall</Box>
+      <Box onClick={() => deleteEvent(event)}>deleteEvent</Box>
+
+
+      <Box>
+        { }
+      </Box>
+    </Box>
   )
 }
 

@@ -1,3 +1,4 @@
+import { Error } from "mongoose"
 import { IEvent, Event } from "../model/event"
 
 
@@ -22,6 +23,18 @@ export async function getEvents(): Promise<IEvent[]> {
     })
 }
 
+// get all events from mongodb
+export async function getEvent(name: string): Promise<IEvent> {
+    return new Promise<IEvent>((resolve, reject) => {
+        Event.findOne({ name: name }, (err: Error, event: IEvent) => {
+            if (err) {
+                reject(err)
+            } else {
+                resolve(event)
+            }
+        })
+    })
+}
 
 // delete event from mongodb
 export async function deleteEvent(name: string) {
