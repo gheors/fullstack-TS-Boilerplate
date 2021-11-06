@@ -5,7 +5,6 @@ import { IEvent, Event } from "../model/event"
 export async function addEvent(name: string) {
     return new Promise((resolve, reject) => {
         const event = new Event({ name })
-        console.log(event)
         event.save().then(resolve).catch(reject)
     })
 }
