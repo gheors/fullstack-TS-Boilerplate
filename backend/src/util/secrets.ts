@@ -12,3 +12,10 @@ if (!PORT) {
     console.log('No PORT inserted. Set PORT environment variable.')
     process.exit(1)
 }
+
+export const JWT_SECRET = process.env.JWT_SECRET as string
+
+if (!JWT_SECRET) {
+    console.log('No JWT secret string. Set JWT_SECRET environment variable.')
+    process.exit(1)
+}
