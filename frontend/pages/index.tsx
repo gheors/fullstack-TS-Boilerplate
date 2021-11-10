@@ -1,6 +1,7 @@
 import { Box } from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
 import React, { useState } from 'react'
+import Loading from '../components/Loading';
 import { Event } from '../interface/event-Interface';
 import { License } from '../interface/global-interfaces';
 import { deleteEvent, getEventByName, getEvents, postEvent } from '../services/api/eventsAPI';
@@ -34,7 +35,7 @@ export default function index({ }: Props) {
 
 
       <Box>
-        { }
+        <Loading />
       </Box>
     </Box>
   )
