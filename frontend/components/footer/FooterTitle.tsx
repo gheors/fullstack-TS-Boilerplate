@@ -1,12 +1,14 @@
-import { Box, VStack } from '@chakra-ui/layout'
-import React from 'react'
+import { Flex } from '@chakra-ui/layout'
+import React, { PropsWithChildren } from 'react'
 
-export default function FooterTitle() {
+
+interface Props {
+    text?: string
+}
+export default function FooterTitle({ text, children }: PropsWithChildren<Props>) {
     return (
-        <VStack flexGrow={1} spacing={10}>
-            <Box flexGrow={1}>social</Box>
-            <Box flexGrow={1}>social</Box>
-            <Box flexGrow={1}>social</Box>
-        </VStack>
+        <Flex flexGrow={1} flexDir='column'>
+            {children}
+        </Flex>
     )
 }

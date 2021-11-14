@@ -3,6 +3,9 @@ import { Button, Checkbox, Flex, FormControl, Input, useColorModeValue } from '@
 import React, { FormEvent, useState } from 'react'
 import { appTheme } from '../../pages/_app'
 import useTranslation from "next-translate/useTranslation";
+import { authenticateUser } from '../../services/api/userAPI';
+import router from 'next/router';
+import { MyContext } from '../../context/MyContext';
 
 export default function Login() {
     const bgColor = useColorModeValue(appTheme.colors.background.bgLight, appTheme.colors.background.bgDark)
@@ -33,8 +36,20 @@ export default function Login() {
     function resetPassword(e: FormEvent) {
 
     }
-    function login(e: FormEvent) {
 
+    const { setUser } = React.useContext(MyContext);
+
+    async function login(e: FormEvent) {
+
+        const res = await authenticateUser(username, password)
+        console.log(res)
+        if (res.status === 200) {
+            setUser(res.data.user)
+            router.replace(`/${res.data.user._id}`)
+
+        } else {
+            router.replace('/sign')
+        }
     }
 
 

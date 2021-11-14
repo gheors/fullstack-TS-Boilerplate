@@ -5,11 +5,11 @@ import { Event } from "../../interface/event-Interface";
 const BASE_URL = "http://localhost:5000/api/events";
 
 export async function postEvent(event: Event) {
-    return axios.post(BASE_URL + "/", event.name);
+    return axios.post(BASE_URL + "/", { event });
 }
 
-export async function getEvents() {
-    return axios.get(BASE_URL + "/");
+export async function getEvents(userId: string) {
+    return axios.get(BASE_URL + `/${userId}`);
 }
 
 export async function getEventByName(name: string) {
@@ -19,5 +19,5 @@ export async function getEventByName(name: string) {
 
 
 export async function deleteEvent(event: Event) {
-    return axios.post(BASE_URL + "/", event.name);
+    return axios.delete(BASE_URL + `/${event.name}`);
 }

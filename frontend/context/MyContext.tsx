@@ -1,7 +1,7 @@
 import React from "react";
-import { License, MapboxStyle } from "../interface/global-interfaces";
+import { User } from "../interface/global-interfaces";
 
 export const MyContext = React.createContext({
-  licenses: [] as License[],
-  setLicenses: (value: License[]) => { },
+  user: { username: '', passowrd: '', _id: '' } as User,
+  setUser: (value: User) => { },
 });

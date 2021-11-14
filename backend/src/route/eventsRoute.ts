@@ -6,13 +6,14 @@ const router = express.Router();
 
 // POST : add event
 router.post('/', async (req, res) => {
-    const events = await addEvent(req.query.name as string)
+    const events = await addEvent(req.body.event)
+    console.log(req.body)
     res.status(200).send(events)
 })
 
 // GET : get all events
-router.get('/', async (req, res) => {
-    const events = await getEvents()
+router.get('/:userId', async (req, res) => {
+    const events = await getEvents(req.params.userId)
     res.send(events)
 })
 

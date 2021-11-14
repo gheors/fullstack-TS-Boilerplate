@@ -1,6 +1,8 @@
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import type { AppProps } from "next/app";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { MyContext } from "../context/MyContext";
+import { User } from "../interface/global-interfaces";
 import "../styles/globals.css";
 import '../styles/gradient.css'
 
@@ -36,7 +38,8 @@ export const appTheme = extendTheme({
       },
     },
     shadows: {
-      black: `0 0 5px 0 rgba(0,0,0,0.7)`
+      black: `0 0 5px 0 rgba(0,0,0,0.7)`,
+      grey: `0 0 5px 1px rgba(100,100,100,0.7)`
     }
   },
 
@@ -47,11 +50,15 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
   }, [])
 
+  const [user, setUser] = useState<User>({} as User)
+
   return (
-    <>
+    <MyContext.Provider
+      value={{ user, setUser }}
+    >
       <ChakraProvider theme={appTheme}>
         <Component {...pageProps} />
       </ChakraProvider>
-    </>
+    </MyContext.Provider>
   );
 }

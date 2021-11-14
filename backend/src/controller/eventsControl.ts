@@ -3,17 +3,17 @@ import { IEvent, Event } from "../model/event"
 
 
 // add Event to mongodb
-export async function addEvent(name: string) {
+export async function addEvent(ev: IEvent) {
     return new Promise((resolve, reject) => {
-        const event = new Event({ name })
+        const event = new Event({ name: ev.name, userId: ev.userId })
         event.save().then(resolve).catch(reject)
     })
 }
 
 // get all events from mongodb
-export async function getEvents(): Promise<IEvent[]> {
+export async function getEvents(userId: string): Promise<IEvent[]> {
     return new Promise<IEvent[]>((resolve, reject) => {
-        Event.find({}, (err, events) => {
+        Event.find({ userId: userId }, (err, events) => {
             if (err) {
                 reject(err)
             } else {

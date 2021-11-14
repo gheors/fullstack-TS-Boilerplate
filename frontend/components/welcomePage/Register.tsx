@@ -3,6 +3,7 @@ import { Button, Checkbox, Flex, FormControl, Input, useColorModeValue } from '@
 import React, { FormEvent, useState } from 'react'
 import { appTheme } from '../../pages/_app'
 import useTranslation from "next-translate/useTranslation";
+import { registerUser } from '../../services/api/userAPI';
 
 export default function Register() {
     const bgColor = useColorModeValue(appTheme.colors.background.bgLight, appTheme.colors.background.bgDark)
@@ -30,10 +31,8 @@ export default function Register() {
         setPassword(event.target.value);
     };
 
-    function resetPassword(e: FormEvent) {
+    function signIn(e: FormEvent) {
 
-    }
-    function login(e: FormEvent) {
 
     }
 
@@ -84,7 +83,7 @@ export default function Register() {
                         boxShadow={"0 1px 3px 0 black"}
                         bg={"#2196F3"}
                         color={"white"}
-                        onClick={!resetMode ? login : resetPassword}
+                        onClick={() => registerUser(username, password)}
                     >
                         {t("Register")}
                     </Button>

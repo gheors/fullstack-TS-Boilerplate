@@ -13,6 +13,7 @@ export default function sign() {
     const { t } = useTranslation("common");
     const bgColor = useColorModeValue(appTheme.colors.background.bgLight, appTheme.colors.background.bgDark)
     const boxShadow = appTheme.styles.shadows.black
+    const boxShadowGrey = appTheme.styles.shadows.grey
 
     const [tabIndex, setTabIndex] = React.useState(0);
     const handleTabsChange = (index: number) => {
@@ -20,35 +21,37 @@ export default function sign() {
     };
 
     return (
-        <Flex minH='100vh' className='test' flexDir='column'>
-            <Flex flexGrow={3}>
-                <Welcome />
-                <Box mt={5} mr={5} mb={5} bg={bgColor} boxShadow={boxShadow} borderRadius='15px'>
-                    <Tabs index={tabIndex} onChange={handleTabsChange} mt={3}>
-                        <TabList pl={4} pr={4} borderRadius='0 0 15px 15px'>
-                            <Tab w={"50%"}>
-                                {t("Login")}
+        <Flex minH='100vh' className='test' flexDir='column' p={0}>
+            <Flex flexDir='column' bgColor={'rgba(50,50,50,1)'} boxShadow={boxShadow} flexGrow={1} >
+                <Flex flexGrow={2} >
+                    <Welcome />
+                    <Box mr={5} mb={5} mt={5} bg={bgColor} boxShadow={boxShadowGrey} borderRadius='15px'>
+                        <Tabs index={tabIndex} onChange={handleTabsChange} mt={3}>
+                            <TabList pl={4} pr={4} borderRadius='0 0 15px 15px'>
+                                <Tab w={"50%"}>
+                                    {t("Login")}
 
-                            </Tab>
-                            <Tab w={"50%"}>
-                                {t("Sign In")}
-                            </Tab>
-                        </TabList>
-                        <TabPanels >
-                            <TabPanel p={0}>
-                                <Login />
+                                </Tab>
+                                <Tab w={"50%"}>
+                                    {t("Sign In")}
+                                </Tab>
+                            </TabList>
+                            <TabPanels >
+                                <TabPanel p={0}>
+                                    <Login />
 
-                            </TabPanel>
-                            <TabPanel p={0}>
-                                <Register />
-                            </TabPanel>
-                        </TabPanels>
-                    </Tabs>
-                    <AccessWith />
-                </Box>
+                                </TabPanel>
+                                <TabPanel p={0}>
+                                    <Register />
+                                </TabPanel>
+                            </TabPanels>
+                        </Tabs>
+                        <AccessWith />
+                    </Box>
+                </Flex>
+                <Footer />
+
             </Flex>
-            <Footer />
-
 
         </Flex >
     )
