@@ -12,14 +12,14 @@ export const userSchema: Schema<IUser> = new Schema({
     password: String,
 })
 
-// userSchema.pre<IUser>('save', async function save(next) {
-//     const hash = bcrypt.hashSync(this.password, 10)
-//     const res = await bcrypt.compare(this.password, hash)
-//     console.log("registration : " + res)
-//     this.password = hash
-//     console.log(this.password)
-//     next()
-// })
+userSchema.pre<IUser>('save', async function save(next) {
+    const hash = bcrypt.hashSync(this.password, 10)
+    const res = await bcrypt.compare(this.password, hash)
+    console.log("registration : " + res)
+    this.password = hash
+    console.log(this.password)
+    next()
+})
 
 userSchema.methods.comparePassword = async function (candidatePassword: string, callback: any) {
     const result = await bcrypt.compare(candidatePassword, this.password);

@@ -2,6 +2,8 @@ import { NextFunction, Request, Response } from 'express'
 import passport from 'passport'
 
 export function authenticateJWT(req: Request, res: Response, next: NextFunction) {
+    console.log(req.authInfo)
+
     passport.authenticate('jwt', function (err, user, info) {
         if (err) {
             console.log(err)

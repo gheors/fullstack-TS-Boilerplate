@@ -2,22 +2,22 @@ import bcrypt from 'bcrypt'
 import { NextFunction, Request, Response } from 'express'
 import * as jwt from 'jsonwebtoken'
 import passport from 'passport'
-import { User } from '../model/user'
+import { IUser, User } from '../model/user'
 import { JWT_SECRET } from '../util/secrets'
 
-export async function registerUser(req: Request, res: Response): Promise<string> {
-    const hashedPassword = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
+export async function registerUser(req: Request, res: Response) {
+    let savedUser = {}
     new Promise((resolve, reject) => {
         const user = new User({
             username: req.body.username,
-            password: hashedPassword,
+            password: req.body.password,
         })
-        console.log(hashedPassword)
         user.save().then(resolve).catch(reject)
+        savedUser = user
     })
 
     const token = jwt.sign({ username: req.body.username }, JWT_SECRET)
-    return token
+    return { token, savedUser }
 }
 
 export function authenticateUser(req: Request, res: Response, next: NextFunction) {
@@ -29,7 +29,20 @@ export function authenticateUser(req: Request, res: Response, next: NextFunction
             return res.status(401).json({ status: 'error', code: 'unauthorized' })
         } else {
             const token = jwt.sign({ username: user.username }, JWT_SECRET)
-            res.status(200).send({ token: token })
+            res.status(200).send({ token: token, user: user })
         }
     })(req, res, next)
+}
+
+
+export async function getUser(name: string): Promise<IUser> {
+    return new Promise<IUser>((resolve, reject) => {
+        User.findOne({ name: name }, (err: Error, user: IUser) => {
+            if (err) {
+                reject(err)
+            } else {
+                resolve(user)
+            }
+        })
+    })
 }
